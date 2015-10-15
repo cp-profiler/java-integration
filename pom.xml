@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <groupId>com.github.cp-profiler</groupId>
+  <artifactId>cpprof-java</artifactId>
+  <version>1.0.0</version>
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>jar</packaging>
+
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>The library to be used to allow profiling constraint programming solvers written in Java using cp-profiler (https://github.com/cp-profiler)</description>
+  <url>https://github.com/cp-profiler/java-integration</url>
+
+  <licenses>
+    <license>
+      <name>Custom License</name>
+      <url>https://github.com/cp-profiler/java-integration/blob/master/LICENSE.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+      <developer>
+        <name>Maxim Shishmarev</name>
+        <email>maxim.shishmarev@monash.edu</email>
+        <organization>cp-profiler</organization>
+        <organizationUrl>https://github.com/cp-profiler</organizationUrl>
+      </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git@github.com:cp-profiler/java-integration.git</connection>
+    <developerConnection>scm:git:git@github.com:cp-profiler/java-integration.git</developerConnection>
+    <url>git@github.com:cp-profiler/java-integration.git</url>
+  </scm>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.zeromq</groupId>
+      <artifactId>jeromq</artifactId>
+      <version>0.3.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>2.6.1</version>
+    </dependency>
+  </dependencies>
+
+</project>
