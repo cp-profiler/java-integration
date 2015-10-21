@@ -52,11 +52,11 @@ public class Connector {
   }
 
 
-  public void connectToSocket(int port) {
+  public void connect(int port) {
     socket.connect("tcp://localhost:" + port);
   }
 
-  public void disconnectFromSocket() {
+  public void disconnect() {
 
     Node msg = Node.newBuilder()
       .setType(Node.MsgType.DONE)
@@ -92,7 +92,7 @@ public class Connector {
 
   }
 
-  public void restartGist(int rid) {
+  public void restart(int rid) {
 
     Node msg = Node.newBuilder()
       .setType(Node.MsgType.START)
@@ -100,6 +100,10 @@ public class Connector {
       .build();
 
     sendOverSocket(msg);
+  }
+
+  public void restart() {
+    restart(-1);
   }
 
   private void sendOverSocket(Node msg) {
