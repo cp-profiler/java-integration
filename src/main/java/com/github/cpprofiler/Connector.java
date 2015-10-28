@@ -39,6 +39,16 @@ public class Connector {
       return this;
     }
 
+    public ExtendedNode setRestartId(int restart_id) {
+      builder.setRestartId(restart_id);
+      return this;
+    }
+
+    public ExtendedNode setThreadId(int thread_id) {
+      builder.setThreadId(thread_id);
+      return this;
+    }
+
     public void send() {
       Node msg = builder.build();
       _connector.sendOverSocket(msg);
@@ -46,7 +56,7 @@ public class Connector {
   }
 
   public Connector() {
-    System.out.println("Connector initialized!");
+    System.out.println("Connector initialized v1.1.0!");
     context = ZMQ.context(1);
     socket = context.socket(ZMQ.PUSH);
   }
