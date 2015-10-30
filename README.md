@@ -4,7 +4,7 @@ The library is available as a Maven package:
 <dependency>
   <groupId>com.github.cp-profiler</groupId>
   <artifactId>cpprof-java</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
