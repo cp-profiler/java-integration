@@ -2,13 +2,13 @@ package com.github.cpprofiler;
 
 import java.nio.ByteBuffer;
 import java.io.*;
-import org.zeromq.ZMQ;
+import java.net.*;
 import com.github.cpprofiler.Message.Node;
 
 public class Connector {
 
-  private ZMQ.Context context;
-  private ZMQ.Socket socket;
+  private Socket clientSocket;
+  private boolean _connected = false;
 
   public enum NodeStatus {
     SOLVED(0), FAILED(1), BRANCH(2), SKIPPED(6);
@@ -56,17 +56,22 @@ public class Connector {
   }
 
   public Connector() {
-    System.out.println("Connector initialized v1.1.0!");
-    context = ZMQ.context(1);
-    socket = context.socket(ZMQ.PUSH);
+    System.out.println("Connector initialized v1.2.0");
   }
 
 
   public void connect(int port) {
-    socket.connect("tcp://localhost:" + port);
+    try {
+      clientSocket = new Socket("localhost", port);
+      _connected = true;
+    } catch (IOException e) {
+      System.err.println("couldn't connect to profiler; running solo");
+    }
   }
 
   public void disconnect() {
+
+    if (!_connected) return;
 
     Node msg = Node.newBuilder()
       .setType(Node.MsgType.DONE)
@@ -74,8 +79,11 @@ public class Connector {
 
     sendOverSocket(msg);
 
-    socket.close();
-    context.term();
+    try {
+      clientSocket.close();
+    } catch (IOException e) {
+      System.err.println("Caught IOException 2: " + e.getMessage());
+    }
   }
 
   public ExtendedNode createNode(int sid, int pid, int alt, int kids, NodeStatus status) {
@@ -86,6 +94,8 @@ public class Connector {
   }
 
   public void sendNode(int sid, int pid, int alt, int kids, NodeStatus status, String label, String info) {
+
+    if (!_connected) return;
 
     Node node = Node.newBuilder()
       .setType(Node.MsgType.NODE)
@@ -103,22 +113,56 @@ public class Connector {
   }
 
   public void restart(int rid) {
+    restart("", rid);
+  }
+
+  public void restart(String file_name) {
+    restart(file_name, -1);
+  }
+
+  private void restart(String file_name, int rid) {
+
+    if (!_connected) return;
 
     Node msg = Node.newBuilder()
       .setType(Node.MsgType.START)
+      .setLabel(file_name)
       .setRestartId(rid)
       .build();
 
     sendOverSocket(msg);
   }
 
-  public void restart() {
-    restart(-1);
+  public void done() {
+    Node msg = Node.newBuilder()
+      .setType(Node.MsgType.DONE)
+      .build();
+
+    sendOverSocket(msg);
   }
 
   private void sendOverSocket(Node msg) {
 
-    socket.send(msg.toByteArray(), 0);
+    if (!_connected) return;
+
+    try {
+
+      byte[] b = msg.toByteArray();
+
+      int size = b.length;
+      byte[] size_buffer = new byte[4];
+
+      for (int i = 0; i < 4; i++) {
+          size_buffer[i] = (byte)(size >>> (i * 8));
+      }
+
+      clientSocket.getOutputStream().write(size_buffer);
+
+      clientSocket.getOutputStream().write(b);
+
+    } catch (IOException e) {
+      System.err.println("Caught IOException 3: " + e.getMessage());
+    }
 
   }
 }

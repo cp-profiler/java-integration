@@ -5,7 +5,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 
   <groupId>com.github.cp-profiler</groupId>
   <artifactId>cpprof-java</artifactId>
-  <version>1.0.0</version>
+  <version>1.2.0</version>
   <modelVersion>4.0.0</modelVersion>
   <packaging>jar</packaging>
 
@@ -36,11 +36,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
   </scm>
 
   <dependencies>
-    <dependency>
-      <groupId>org.zeromq</groupId>
-      <artifactId>jeromq</artifactId>
-      <version>0.3.4</version>
-    </dependency>
     <dependency>
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>

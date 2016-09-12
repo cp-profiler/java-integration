@@ -157,6 +157,42 @@ public final class Message {
      */
     com.google.protobuf.ByteString
         getInfoBytes();
+
+    /**
+     * <code>optional int32 nogood_bld = 15;</code>
+     */
+    boolean hasNogoodBld();
+    /**
+     * <code>optional int32 nogood_bld = 15;</code>
+     */
+    int getNogoodBld();
+
+    /**
+     * <code>optional bool uses_assumptions = 16;</code>
+     */
+    boolean hasUsesAssumptions();
+    /**
+     * <code>optional bool uses_assumptions = 16;</code>
+     */
+    boolean getUsesAssumptions();
+
+    /**
+     * <code>optional int32 backjump_distance = 17;</code>
+     */
+    boolean hasBackjumpDistance();
+    /**
+     * <code>optional int32 backjump_distance = 17;</code>
+     */
+    int getBackjumpDistance();
+
+    /**
+     * <code>optional int32 decision_level = 18;</code>
+     */
+    boolean hasDecisionLevel();
+    /**
+     * <code>optional int32 decision_level = 18;</code>
+     */
+    int getDecisionLevel();
   }
   /**
    * Protobuf type {@code message.Node}
@@ -294,6 +330,26 @@ public final class Message {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00002000;
               info_ = bs;
+              break;
+            }
+            case 120: {
+              bitField0_ |= 0x00004000;
+              nogoodBld_ = input.readInt32();
+              break;
+            }
+            case 128: {
+              bitField0_ |= 0x00008000;
+              usesAssumptions_ = input.readBool();
+              break;
+            }
+            case 136: {
+              bitField0_ |= 0x00010000;
+              backjumpDistance_ = input.readInt32();
+              break;
+            }
+            case 144: {
+              bitField0_ |= 0x00020000;
+              decisionLevel_ = input.readInt32();
               break;
             }
           }
@@ -937,6 +993,66 @@ public final class Message {
       }
     }
 
+    public static final int NOGOOD_BLD_FIELD_NUMBER = 15;
+    private int nogoodBld_;
+    /**
+     * <code>optional int32 nogood_bld = 15;</code>
+     */
+    public boolean hasNogoodBld() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <code>optional int32 nogood_bld = 15;</code>
+     */
+    public int getNogoodBld() {
+      return nogoodBld_;
+    }
+
+    public static final int USES_ASSUMPTIONS_FIELD_NUMBER = 16;
+    private boolean usesAssumptions_;
+    /**
+     * <code>optional bool uses_assumptions = 16;</code>
+     */
+    public boolean hasUsesAssumptions() {
+      return ((bitField0_ & 0x00008000) == 0x00008000);
+    }
+    /**
+     * <code>optional bool uses_assumptions = 16;</code>
+     */
+    public boolean getUsesAssumptions() {
+      return usesAssumptions_;
+    }
+
+    public static final int BACKJUMP_DISTANCE_FIELD_NUMBER = 17;
+    private int backjumpDistance_;
+    /**
+     * <code>optional int32 backjump_distance = 17;</code>
+     */
+    public boolean hasBackjumpDistance() {
+      return ((bitField0_ & 0x00010000) == 0x00010000);
+    }
+    /**
+     * <code>optional int32 backjump_distance = 17;</code>
+     */
+    public int getBackjumpDistance() {
+      return backjumpDistance_;
+    }
+
+    public static final int DECISION_LEVEL_FIELD_NUMBER = 18;
+    private int decisionLevel_;
+    /**
+     * <code>optional int32 decision_level = 18;</code>
+     */
+    public boolean hasDecisionLevel() {
+      return ((bitField0_ & 0x00020000) == 0x00020000);
+    }
+    /**
+     * <code>optional int32 decision_level = 18;</code>
+     */
+    public int getDecisionLevel() {
+      return decisionLevel_;
+    }
+
     private void initFields() {
       type_ = com.github.cpprofiler.Message.Node.MsgType.NODE;
       sid_ = 0;
@@ -952,6 +1068,10 @@ public final class Message {
       solution_ = "";
       nogood_ = "";
       info_ = "";
+      nogoodBld_ = 0;
+      usesAssumptions_ = false;
+      backjumpDistance_ = 0;
+      decisionLevel_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1011,6 +1131,18 @@ public final class Message {
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeBytes(14, getInfoBytes());
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeInt32(15, nogoodBld_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        output.writeBool(16, usesAssumptions_);
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        output.writeInt32(17, backjumpDistance_);
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        output.writeInt32(18, decisionLevel_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1076,6 +1208,22 @@ public final class Message {
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(14, getInfoBytes());
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(15, nogoodBld_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(16, usesAssumptions_);
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(17, backjumpDistance_);
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(18, decisionLevel_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1222,6 +1370,14 @@ public final class Message {
         bitField0_ = (bitField0_ & ~0x00001000);
         info_ = "";
         bitField0_ = (bitField0_ & ~0x00002000);
+        nogoodBld_ = 0;
+        bitField0_ = (bitField0_ & ~0x00004000);
+        usesAssumptions_ = false;
+        bitField0_ = (bitField0_ & ~0x00008000);
+        backjumpDistance_ = 0;
+        bitField0_ = (bitField0_ & ~0x00010000);
+        decisionLevel_ = 0;
+        bitField0_ = (bitField0_ & ~0x00020000);
         return this;
       }
 
@@ -1306,6 +1462,22 @@ public final class Message {
           to_bitField0_ |= 0x00002000;
         }
         result.info_ = info_;
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.nogoodBld_ = nogoodBld_;
+        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+          to_bitField0_ |= 0x00008000;
+        }
+        result.usesAssumptions_ = usesAssumptions_;
+        if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
+          to_bitField0_ |= 0x00010000;
+        }
+        result.backjumpDistance_ = backjumpDistance_;
+        if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
+          to_bitField0_ |= 0x00020000;
+        }
+        result.decisionLevel_ = decisionLevel_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1371,6 +1543,18 @@ public final class Message {
           bitField0_ |= 0x00002000;
           info_ = other.info_;
           onChanged();
+        }
+        if (other.hasNogoodBld()) {
+          setNogoodBld(other.getNogoodBld());
+        }
+        if (other.hasUsesAssumptions()) {
+          setUsesAssumptions(other.getUsesAssumptions());
+        }
+        if (other.hasBackjumpDistance()) {
+          setBackjumpDistance(other.getBackjumpDistance());
+        }
+        if (other.hasDecisionLevel()) {
+          setDecisionLevel(other.getDecisionLevel());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2033,6 +2217,134 @@ public final class Message {
         return this;
       }
 
+      private int nogoodBld_ ;
+      /**
+       * <code>optional int32 nogood_bld = 15;</code>
+       */
+      public boolean hasNogoodBld() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      /**
+       * <code>optional int32 nogood_bld = 15;</code>
+       */
+      public int getNogoodBld() {
+        return nogoodBld_;
+      }
+      /**
+       * <code>optional int32 nogood_bld = 15;</code>
+       */
+      public Builder setNogoodBld(int value) {
+        bitField0_ |= 0x00004000;
+        nogoodBld_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 nogood_bld = 15;</code>
+       */
+      public Builder clearNogoodBld() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        nogoodBld_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean usesAssumptions_ ;
+      /**
+       * <code>optional bool uses_assumptions = 16;</code>
+       */
+      public boolean hasUsesAssumptions() {
+        return ((bitField0_ & 0x00008000) == 0x00008000);
+      }
+      /**
+       * <code>optional bool uses_assumptions = 16;</code>
+       */
+      public boolean getUsesAssumptions() {
+        return usesAssumptions_;
+      }
+      /**
+       * <code>optional bool uses_assumptions = 16;</code>
+       */
+      public Builder setUsesAssumptions(boolean value) {
+        bitField0_ |= 0x00008000;
+        usesAssumptions_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool uses_assumptions = 16;</code>
+       */
+      public Builder clearUsesAssumptions() {
+        bitField0_ = (bitField0_ & ~0x00008000);
+        usesAssumptions_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int backjumpDistance_ ;
+      /**
+       * <code>optional int32 backjump_distance = 17;</code>
+       */
+      public boolean hasBackjumpDistance() {
+        return ((bitField0_ & 0x00010000) == 0x00010000);
+      }
+      /**
+       * <code>optional int32 backjump_distance = 17;</code>
+       */
+      public int getBackjumpDistance() {
+        return backjumpDistance_;
+      }
+      /**
+       * <code>optional int32 backjump_distance = 17;</code>
+       */
+      public Builder setBackjumpDistance(int value) {
+        bitField0_ |= 0x00010000;
+        backjumpDistance_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 backjump_distance = 17;</code>
+       */
+      public Builder clearBackjumpDistance() {
+        bitField0_ = (bitField0_ & ~0x00010000);
+        backjumpDistance_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int decisionLevel_ ;
+      /**
+       * <code>optional int32 decision_level = 18;</code>
+       */
+      public boolean hasDecisionLevel() {
+        return ((bitField0_ & 0x00020000) == 0x00020000);
+      }
+      /**
+       * <code>optional int32 decision_level = 18;</code>
+       */
+      public int getDecisionLevel() {
+        return decisionLevel_;
+      }
+      /**
+       * <code>optional int32 decision_level = 18;</code>
+       */
+      public Builder setDecisionLevel(int value) {
+        bitField0_ |= 0x00020000;
+        decisionLevel_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 decision_level = 18;</code>
+       */
+      public Builder clearDecisionLevel() {
+        bitField0_ = (bitField0_ & ~0x00020000);
+        decisionLevel_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:message.Node)
     }
 
@@ -2058,19 +2370,21 @@ public final class Message {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rmessage.proto\022\007message\"\261\003\n\004Node\022#\n\004typ" +
+      "\n\rmessage.proto\022\007message\"\222\004\n\004Node\022#\n\004typ" +
       "e\030\001 \002(\0162\025.message.Node.MsgType\022\013\n\003sid\030\002 " +
       "\001(\005\022\013\n\003pid\030\003 \001(\005\022\013\n\003alt\030\004 \001(\005\022\014\n\004kids\030\005 " +
       "\001(\005\022(\n\006status\030\006 \001(\0162\030.message.Node.NodeS" +
       "tatus\022\022\n\nrestart_id\030\007 \001(\005\022\014\n\004time\030\010 \001(\004\022" +
       "\021\n\tthread_id\030\t \001(\005\022\r\n\005label\030\n \001(\t\022\023\n\013dom" +
       "ain_size\030\013 \001(\002\022\020\n\010solution\030\014 \001(\t\022\016\n\006nogo" +
-      "od\030\r \001(\t\022\014\n\004info\030\016 \001(\t\"(\n\007MsgType\022\010\n\004NOD" +
-      "E\020\000\022\010\n\004DONE\020\001\022\t\n\005START\020\002\"r\n\nNodeStatus\022\n" +
-      "\n\006SOLVED\020\000\022\n\n\006FAILED\020\001\022\n\n\006BRANCH\020\002\022\020\n\014UN",
-      "DETERMINED\020\003\022\010\n\004STOP\020\004\022\n\n\006UNSTOP\020\005\022\013\n\007SK" +
-      "IPPED\020\006\022\013\n\007MERGING\020\007B\027\n\025com.github.cppro" +
-      "filer"
+      "od\030\r \001(\t\022\014\n\004info\030\016 \001(\t\022\022\n\nnogood_bld\030\017 \001" +
+      "(\005\022\030\n\020uses_assumptions\030\020 \001(\010\022\031\n\021backjump" +
+      "_distance\030\021 \001(\005\022\026\n\016decision_level\030\022 \001(\005\"",
+      "(\n\007MsgType\022\010\n\004NODE\020\000\022\010\n\004DONE\020\001\022\t\n\005START\020" +
+      "\002\"r\n\nNodeStatus\022\n\n\006SOLVED\020\000\022\n\n\006FAILED\020\001\022" +
+      "\n\n\006BRANCH\020\002\022\020\n\014UNDETERMINED\020\003\022\010\n\004STOP\020\004\022" +
+      "\n\n\006UNSTOP\020\005\022\013\n\007SKIPPED\020\006\022\013\n\007MERGING\020\007B\027\n" +
+      "\025com.github.cpprofiler"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2089,7 +2403,7 @@ public final class Message {
     internal_static_message_Node_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_message_Node_descriptor,
-        new java.lang.String[] { "Type", "Sid", "Pid", "Alt", "Kids", "Status", "RestartId", "Time", "ThreadId", "Label", "DomainSize", "Solution", "Nogood", "Info", });
+        new java.lang.String[] { "Type", "Sid", "Pid", "Alt", "Kids", "Status", "RestartId", "Time", "ThreadId", "Label", "DomainSize", "Solution", "Nogood", "Info", "NogoodBld", "UsesAssumptions", "BackjumpDistance", "DecisionLevel", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
