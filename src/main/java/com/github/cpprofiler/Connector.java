@@ -8,7 +8,6 @@ import com.github.cpprofiler.Message.Node;
 public class Connector {
 
   private Socket clientSocket;
-  private boolean _connected = false;
 
   public enum NodeStatus {
     SOLVED(0), FAILED(1), BRANCH(2), SKIPPED(6);
@@ -49,29 +48,22 @@ public class Connector {
       return this;
     }
 
-    public void send() {
+    public void send() throws IOException {
       Node msg = builder.build();
       _connector.sendOverSocket(msg);
     }
   }
 
   public Connector() {
-    System.out.println("Connector initialized v1.2.0");
+    System.out.println("Connector initialized v1.3.0");
   }
 
 
-  public void connect(int port) {
-    try {
-      clientSocket = new Socket("localhost", port);
-      _connected = true;
-    } catch (IOException e) {
-      System.err.println("couldn't connect to profiler; running solo");
-    }
+  public void connect(int port) throws IOException {
+    clientSocket = new Socket("localhost", port);
   }
 
-  public void disconnect() {
-
-    if (!_connected) return;
+  public void disconnect() throws IOException {
 
     Node msg = Node.newBuilder()
       .setType(Node.MsgType.DONE)
@@ -79,11 +71,7 @@ public class Connector {
 
     sendOverSocket(msg);
 
-    try {
-      clientSocket.close();
-    } catch (IOException e) {
-      System.err.println("Caught IOException 2: " + e.getMessage());
-    }
+    clientSocket.close();
   }
 
   public ExtendedNode createNode(int sid, int pid, int alt, int kids, NodeStatus status) {
@@ -93,9 +81,9 @@ public class Connector {
     return node;
   }
 
-  public void sendNode(int sid, int pid, int alt, int kids, NodeStatus status, String label, String info) {
-
-    if (!_connected) return;
+  public void sendNode(int sid, int pid, int alt, int kids,
+                       NodeStatus status, String label,
+                       String info) throws IOException {
 
     Node node = Node.newBuilder()
       .setType(Node.MsgType.NODE)
@@ -112,17 +100,11 @@ public class Connector {
 
   }
 
-  public void restart(int rid) {
+  public void restart(int rid) throws IOException {
     restart("", rid);
   }
 
-  public void restart(String file_name) {
-    restart(file_name, -1);
-  }
-
-  private void restart(String file_name, int rid) {
-
-    if (!_connected) return;
+  public void restart(String file_name, int rid) throws IOException {
 
     Node msg = Node.newBuilder()
       .setType(Node.MsgType.START)
@@ -133,7 +115,7 @@ public class Connector {
     sendOverSocket(msg);
   }
 
-  public void done() {
+  public void done() throws IOException {
     Node msg = Node.newBuilder()
       .setType(Node.MsgType.DONE)
       .build();
@@ -141,28 +123,20 @@ public class Connector {
     sendOverSocket(msg);
   }
 
-  private void sendOverSocket(Node msg) {
+  private void sendOverSocket(Node msg) throws IOException {
 
-    if (!_connected) return;
+    byte[] b = msg.toByteArray();
 
-    try {
+    int size = b.length;
+    byte[] size_buffer = new byte[4];
 
-      byte[] b = msg.toByteArray();
-
-      int size = b.length;
-      byte[] size_buffer = new byte[4];
-
-      for (int i = 0; i < 4; i++) {
-          size_buffer[i] = (byte)(size >>> (i * 8));
-      }
-
-      clientSocket.getOutputStream().write(size_buffer);
-
-      clientSocket.getOutputStream().write(b);
-
-    } catch (IOException e) {
-      System.err.println("Caught IOException 3: " + e.getMessage());
+    for (int i = 0; i < 4; i++) {
+        size_buffer[i] = (byte)(size >>> (i * 8));
     }
+
+    clientSocket.getOutputStream().write(size_buffer);
+
+    clientSocket.getOutputStream().write(b);
 
   }
 }
