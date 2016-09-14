@@ -10,7 +10,7 @@ The library is available as a Maven package:
 
 
 ## How to use
-[coming soon - for now have a look how we use this library in this minimal working example https://github.com/cp-profiler/java-integration-example]
+
 
 Instantiate the Connector class:
 
@@ -39,8 +39,9 @@ connector.createNode(id, parent_id, alt, kids, status)
 ```
 
 Mandatory fields:
+
 | Field       | Description               |
-| :---------------: | ----------------------------------- |
+| :---------: | ----------------------------------- |
 | `id`       | Unique identifier for a node |
 | `parent_id`       | The identifier of a parent node (`-1` for the root) |
 | `alt`       | Which alternative the current node is with respect to its parent (`-1` for the root) |
@@ -48,8 +49,9 @@ Mandatory fields:
 | `status`       | One of the options provided from `Connector.NodeStatus` in regard to the node's type (`BRANCH`, `SOLVED`, `FAILED` etc.)|
 
 Some optional fields:
+
 | Field       | Description               |
-| :---------------: | ----------------------------------- |
+| :---------: | ----------------------------------- |
 | `label`       | This text information will be visible on the tree (usually a search decision) |
 | `info`       | Arbitrary information in JSON format that can be displayed in a separate text window for each node |
 
@@ -57,6 +59,8 @@ Disconnect when the search is done to release the socket used by *Connector*.
 ```
 connector.disconnect();
 ```
+
+Check out an example use of this library [here](https://github.com/cp-profiler/java-integration-example).
 
 ### More about `info` field
 
